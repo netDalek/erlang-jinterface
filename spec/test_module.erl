@@ -20,3 +20,5 @@ tuple() -> {ok, tuple}.
 map() -> #{key1 => "value", key2 => 123}.
 
 echo(E) -> E.
+
+error() -> erlang:error(some_error).

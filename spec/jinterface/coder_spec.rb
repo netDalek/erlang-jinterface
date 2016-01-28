@@ -1,12 +1,8 @@
 RSpec.describe Erlang::Jinterface::Coder do
   before(:all) do
-    @erl_pid = start_node
     @connection = connect_to_node
   end
 
-  after(:all) do
-    stop_node(@erl_pid)
-  end
 
   let(:decoder) { Erlang::Jinterface::Decoder.new }
 

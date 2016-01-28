@@ -1,9 +1,13 @@
 java_import "com.ericsson.otp.erlang.OtpSelf"
 java_import "com.ericsson.otp.erlang.OtpPeer"
 
+def hostname
+  `hostname -s`.strip
+end
+
 def start_node
   pid = spawn <<-STR
-      erl -name server@a2p-dev.fun-box.ru -setcookie qwerty -eval "compile:file('spec/test_module')"
+      erl -sname server@#{hostname} -setcookie qwerty -eval "compile:file('spec/test_module')"
   STR
   sleep(1)
   pid
@@ -14,8 +18,8 @@ def stop_node(pid)
 end
 
 def connect_to_node()
-  client = OtpSelf.new("client@a2p-dev.fun-box.ru", "qwerty") 
-  other  = OtpPeer.new("server@a2p-dev.fun-box.ru")
+  client = OtpSelf.new(SecureRandom.hex, "qwerty") 
+  other  = OtpPeer.new("server@#{hostname}")
   client.connect(other)
 end
 

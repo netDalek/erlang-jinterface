@@ -1,13 +1,9 @@
 #encoding: utf-8
 RSpec.describe Erlang::Jinterface::Decoder do
   before(:all) do
-    @erl_pid = start_node
     @connection = connect_to_node
   end
 
-  after(:all) do
-    stop_node(@erl_pid)
-  end
 
   def send(method)
     subject.to_ruby send_to_node(@connection, method)

@@ -19,4 +19,12 @@ RSpec.configure do |config|
   config.order = :random
 
   Kernel.srand config.seed
+  
+  config.before(:suite) do
+    @erl_pid = start_node
+  end
+
+  config.after(:suite) do
+    stop_node(@erl_pid)
+  end
 end
