@@ -1,3 +1,6 @@
+java_import "com.ericsson.otp.erlang.OtpSelf"
+java_import "com.ericsson.otp.erlang.OtpPeer"
+
 module Erlang
   module Jinterface
     class Connection

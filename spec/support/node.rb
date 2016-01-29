@@ -1,6 +1,3 @@
-java_import "com.ericsson.otp.erlang.OtpSelf"
-java_import "com.ericsson.otp.erlang.OtpPeer"
-
 def hostname
   `hostname -s`.strip
 end
