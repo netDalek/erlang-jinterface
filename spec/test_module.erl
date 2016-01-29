@@ -4,6 +4,7 @@
 atom() -> atom.
 
 binary() -> <<"binary">>.
+binary(Bin) when is_binary(Bin) -> ok.
 
 utf_binary() -> <<"слово"/utf8>>.
 

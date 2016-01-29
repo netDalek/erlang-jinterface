@@ -7,7 +7,11 @@ RSpec.describe Erlang::Jinterface::Coder do
   let(:decoder) { Erlang::Jinterface::Decoder.new }
 
   def echo(arg)
-    decoder.to_ruby send_to_node(@connection, "echo", subject.to_erlang([arg]))
+    send("echo", arg)
+  end
+
+  def send(method, *args)
+    decoder.to_ruby send_to_node(@connection, method.to_s, subject.to_erlang(args))
   end
 
   context "default coder" do
@@ -38,7 +42,7 @@ RSpec.describe Erlang::Jinterface::Coder do
     end
 
     it "converts Encoding::ASCII_8BIT string to binary" do
-      expect(echo("binary".force_encoding(Encoding::ASCII_8BIT))).to eq("binary".bytes.to_a)
+      expect(send(:binary, "binary".force_encoding(Encoding::ASCII_8BIT))).to eq(:ok)
     end
   end
 end

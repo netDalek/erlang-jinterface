@@ -1,5 +1,4 @@
 RSpec.describe Erlang::Jinterface::Connection do
-
   context "default coder" do
     subject { described_class.new("server@#{hostname}", "qwerty") }
 
@@ -9,6 +8,13 @@ RSpec.describe Erlang::Jinterface::Connection do
 
     it "raises BadRpcError" do
       expect{ subject.test_module.error }.to raise_error(Erlang::Jinterface::BadRpcError)
+    end
+  end
+
+  context "binary to array coder" do
+    subject { described_class.new("server@#{hostname}", "qwerty", binary: :array) }
+    it "returns binary as array" do
+      expect(subject.test_module.echo("test")).to eq("test".bytes.to_a)
     end
   end
 end

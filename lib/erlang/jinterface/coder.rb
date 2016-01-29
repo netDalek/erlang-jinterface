@@ -13,7 +13,7 @@ module Erlang
   module Jinterface
     class Coder
       def initialize(options = {})
-        @string = options[:string]
+        @string = options[:ruby_string] || :binary
       end
 
       def array_to_erlang(array)

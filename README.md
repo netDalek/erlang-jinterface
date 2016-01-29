@@ -18,8 +18,12 @@ Or install it yourself as:
 
 ## Usage
 
+See connection_spec.rb for usage examples
+
 Types mapping table
 
+| Erlang type | Ruby type |
+| ----------- | --------- |
 | OtpErlangFloat | Float |
 | OtpErlangDouble | Float |
 | OtpErlangAtom | Symbol |
@@ -30,12 +34,14 @@ Types mapping table
 | OtpErlangTuple | Array with additional first element :tuple. So {ok, 1} becomes [:tuple, :ok, 1]
 | OtpErlangMap | Hash |
 
+| Ruby type | Erlang  type |
+| --------- | ------------ |
 | Float | OtpErlangFloat |
 | Float | OtpErlangDouble |
 | Symbol | OtpErlangAtom |
 | Array | OtpErlangList |
 | ASCII-8BIT String | Binary |
-| not ASCII-8BIT String | Binary or String(List). Default is binary. Add option {ruby_string: :string} to string(list) |
+| not ASCII-8BIT String | Binary or String(List). Default is binary. Add option {ruby_string: :string} to convet to string(list) |
 | Integer | OtpErlangLong |
 | String | OtpErlangString |
 | Array with additional first element :tuple, like [:tuple, :ok, 1] | OtpErlangTuple |

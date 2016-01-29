@@ -32,8 +32,12 @@ RSpec.describe Erlang::Jinterface::Decoder do
       expect(send(:long)).to eq(123)
     end
 
-    it "converts binary to byte array" do
-      expect(send(:binary)).to eq("binary".bytes.to_a)
+    it "converts binary to string" do
+      expect(send(:binary)).to eq("binary")
+    end
+
+    it "converts utf_binary to string" do
+      expect(send(:utf_binary)).to eq("слово")
     end
 
     it "converts string to string" do
@@ -42,14 +46,10 @@ RSpec.describe Erlang::Jinterface::Decoder do
   end
 
   context "binary to utf_string coder" do
-    subject { described_class.new(binary: :utf_string) }
+    subject { described_class.new(binary: :array) }
 
-    it "converts binary to string" do
-      expect(send(:binary)).to eq("binary")
-    end
-
-    it "converts binary to string" do
-      expect(send(:utf_binary)).to eq("слово")
+    it "converts binary to byte array" do
+      expect(send(:binary)).to eq("binary".bytes.to_a)
     end
   end
 
@@ -66,7 +66,7 @@ RSpec.describe Erlang::Jinterface::Decoder do
   end
 
   context "string to array coder" do
-    subject { described_class.new(string: :array) }
+    subject { described_class.new(otp_string: :array) }
 
     it "converts string to array" do
       expect(send(:string)).to eq("string".bytes.to_a)
