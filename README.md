@@ -1,6 +1,6 @@
 # Erlang::Jinterface
 
-TODO: Write a gem description
+This gem allows you to run rpc from jruby code to erlang node
 
 ## Installation
 
@@ -18,7 +18,28 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Types mapping table
+
+| OtpErlangFloat | Float |
+| OtpErlangDouble | Float |
+| OtpErlangAtom | Symbol |
+| OtpErlangList | Array |
+| OtpErlangBinary | String or Array of bytes. Default is UTF-8 string. Add option {binary: :array} to convert to array and {binary: :ascii_string} to convert to ASCII_8BIT sting |
+| OtpErlangLong | Integer |
+| OtpErlangString | String or Array of bytes. Default is UTF-8 string. Add option {otp_string: :array} to convert to array |
+| OtpErlangTuple | Array with additional first element :tuple. So {ok, 1} becomes [:tuple, :ok, 1]
+| OtpErlangMap | Hash |
+
+| Float | OtpErlangFloat |
+| Float | OtpErlangDouble |
+| Symbol | OtpErlangAtom |
+| Array | OtpErlangList |
+| ASCII-8BIT String | Binary |
+| not ASCII-8BIT String | Binary or String(List). Default is binary. Add option {ruby_string: :string} to string(list) |
+| Integer | OtpErlangLong |
+| String | OtpErlangString |
+| Array with additional first element :tuple, like [:tuple, :ok, 1] | OtpErlangTuple |
+| Hash | OtpErlangMap |
 
 ## Contributing
 

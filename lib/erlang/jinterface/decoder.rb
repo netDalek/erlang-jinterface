@@ -12,8 +12,8 @@ module Erlang
   module Jinterface
     class Decoder
       def initialize(options = {})
-        @binary = options[:binary]
-        @string = options[:string]
+        @binary = options[:binary] || :utf_string
+        @string = options[:otp_string] || :string
       end
 
       def to_ruby(object)
@@ -25,19 +25,23 @@ module Erlang
           case @string
           when :array
             result.bytes.to_a
-          else
+          when :string
             result
+          else
+            raise "unknown OtpErlangString conversion type #{@string}"
           end
         when OtpErlangBinary
-            result = object.binaryValue.to_a
-            case @binary
-            when :utf_string
-                result.pack('c*').force_encoding('UTF-8')
-            when :ascii_string
-                result.pack('c*')
-            else
-                result
-            end
+          result = object.binaryValue.to_a
+          case @binary
+          when :utf_string
+            result.pack('c*').force_encoding('UTF-8')
+          when :ascii_string
+            result.pack('c*')
+          when :array
+            result
+          else
+            raise "unknown OtpErlangBinary conversion type #{@binary}"
+          end
         when OtpErlangFloat
           object.floatValue
         when OtpErlangDouble
@@ -53,7 +57,7 @@ module Erlang
             hash[to_ruby(e)] = to_ruby(object.get(e))
           end
         else
-            raise "Unknown type #{object.class}"
+          raise "don't know how to convert type #{object.class}"
         end
       end
     end

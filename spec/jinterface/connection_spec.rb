@@ -4,11 +4,11 @@ RSpec.describe Erlang::Jinterface::Connection do
     subject { described_class.new("server@#{hostname}", "qwerty") }
 
     it "returns rpc result" do
-      expect(subject.rpc(:echo, 1)).to eq(1)
+      expect(subject.test_module.echo(1)).to eq(1)
     end
 
-    it "raise BadRpcError" do
-      expect{ subject.rpc(:error) }.to raise_error(Erlang::Jinterface::BadRpcError)
+    it "raises BadRpcError" do
+      expect{ subject.test_module.error }.to raise_error(Erlang::Jinterface::BadRpcError)
     end
   end
 end

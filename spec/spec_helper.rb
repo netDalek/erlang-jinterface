@@ -1,8 +1,6 @@
 Dir["deps/*.jar"].each { |f| require f }
-Dir["lib/**/*.rb"].each { |f| require f }
+require 'lib/erlang/jinterface'
 Dir["spec/support/**/*.rb"].each { |f| require f }
-require 'pry'
-
 
 RSpec.configure do |config|
   config.filter_run :focus

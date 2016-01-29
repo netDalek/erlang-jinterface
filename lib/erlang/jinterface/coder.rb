@@ -35,10 +35,15 @@ module Erlang
         when Float
           OtpErlangDouble.new(object)
         when String
-          if object.encoding == Encoding::ASCII_8BIT || @string == :binary
+          if object.encoding == Encoding::ASCII_8BIT
             OtpErlangBinary.new(object.bytes.to_a.to_java(Java::byte))
           else
-            OtpErlangString.new(object)
+            case @string
+            when :binary
+              OtpErlangBinary.new(object.bytes.to_a.to_java(Java::byte))
+            when :list
+              OtpErlangString.new(object)
+            end
           end
         when Hash
           OtpErlangMap.new(array_to_erlang(object.keys), array_to_erlang(object.values))

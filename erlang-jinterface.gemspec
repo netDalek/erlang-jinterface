@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Erlang::Jinterface::VERSION
   spec.authors       = ["Denis Kirichenko"]
   spec.email         = ["d.kirichenko@fun-box.ru"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.description   = %q{Erlang Jinterface jruby adapter}
+  spec.summary       = %q{Erlang Jinterface jruby adapter}
   spec.homepage      = ""
   spec.license       = "MIT"
 
