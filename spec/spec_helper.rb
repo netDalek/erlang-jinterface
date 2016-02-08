@@ -1,4 +1,4 @@
-Dir["deps/*.jar"].each { |f| require f }
+require 'deps/OtpErlang.jar'
 require 'lib/erlang/jinterface'
 Dir["spec/support/**/*.rb"].each { |f| require f }
 
