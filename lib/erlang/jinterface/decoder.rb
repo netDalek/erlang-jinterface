@@ -7,6 +7,7 @@ java_import "com.ericsson.otp.erlang.OtpErlangLong"
 java_import "com.ericsson.otp.erlang.OtpErlangString"
 java_import "com.ericsson.otp.erlang.OtpErlangTuple"
 java_import "com.ericsson.otp.erlang.OtpErlangMap"
+java_import "com.ericsson.otp.erlang.OtpErlangPid"
 
 module Erlang
   module Jinterface
@@ -56,6 +57,8 @@ module Erlang
           object.keys.each_with_object({}) do |e, hash|
             hash[to_ruby(e)] = to_ruby(object.get(e))
           end
+        when OtpErlangPid
+          object.toString()
         else
           raise "don't know how to convert type #{object.class}"
         end

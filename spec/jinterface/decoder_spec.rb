@@ -43,6 +43,10 @@ RSpec.describe Erlang::Jinterface::Decoder do
     it "converts string to string" do
       expect(send(:string)).to eq("string")
     end
+
+    it "converts pig to string" do
+      expect(send(:pid)).to match(/Pid/)
+    end
   end
 
   context "binary to utf_string coder" do
